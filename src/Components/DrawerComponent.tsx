@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, Drawer, Form, Input, Row, Space, message } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { closeDrawer } from '../features/DrawerSlice/DrawerSlice';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import axios from 'axios';
+import { RootState } from '../Store/Store';
+import useGetPost from '../hooks/useGetPost';
+
 
 const fetchUserById = async (id: string) => {
   const response = await axios.get(`http://localhost:3000/users/${id}`);
@@ -19,29 +22,30 @@ const createUser = async (data: any) => {
 };
 
 const DrawerComponent: React.FC = () => {
+ 
   const dispatch = useDispatch();
-  const isDrawerOpen = useSelector((state) => state.drawer.open);
-  const editingId = useSelector((state) => state.drawer.editingId);
+  const isDrawerOpen = useSelector((state:RootState) => state.drawer.open);
+  const editingId = useSelector((state:RootState) => state.drawer.editingId);
   const [form] = Form.useForm();
   const queryClient = useQueryClient();
 
-  const { data: user, refetch } = useQuery(
-    ['user', editingId],
-    () => fetchUserById(editingId),
-    { enabled: !!editingId } // Only fetch if editingId is set
-  );
+  // const { data: user, refetch } = useQuery(
+  //   ['user', editingId],
+  //   () => fetchUserById(editingId),
+  //   { enabled: !!editingId } 
+  // );
 
-  useEffect(() => {
-    if (editingId) {
-      refetch(); // Fetch data when editingId changes
-    }
-  }, [editingId, refetch]);
+  // useEffect(() => {
+  //   if (editingId) {
+  //     refetch(); 
+  //   }
+  // }, [editingId]);
 
   useEffect(() => {
     if (user) {
-      form.setFieldsValue(user); // Populate form with user data
+      form.setFieldsValue(user); 
     } else {
-      form.resetFields(); // Clear form if creating a new user
+      form.resetFields(); 
     }
   }, [user, form]);
 
@@ -80,9 +84,9 @@ const DrawerComponent: React.FC = () => {
 
   const onFinish = (values: any) => {
     if (editingId) {
-      updateMutation.mutate(values); // Update if editingId is set
+      updateMutation.mutate(values); 
     } else {
-      createMutation.mutate(values); // Create if editingId is null
+      createMutation.mutate(values); 
     }
   };
 

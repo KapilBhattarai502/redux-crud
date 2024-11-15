@@ -17,6 +17,12 @@
       "fullname": "Subash Jirel",
       "address": "Chabhil",
       "age": "21"
+    },
+    {
+      "id": "b9c7",
+      "fullname": "Sushil Karki",
+      "age": "23",
+      "address": "Kathmandu"
     }
   ]
 }

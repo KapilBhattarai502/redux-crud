@@ -10,6 +10,7 @@ import Loader from "./Loader";
 import DrawerComponent from "./DrawerComponent";
 import { openDrawer } from "../features/DrawerSlice/DrawerSlice";
 import { useDeleteData } from "../hooks/useDeleteData"; // Import your custom hook
+import useGetPost from "../hooks/useGetPost";
 
 interface DataType {
   id: string;
@@ -19,6 +20,8 @@ interface DataType {
 }
 
 const Home: React.FC = () => {
+  const[response,setResponse]=useState()
+  const {mutate}=useGetPost(setResponse)
   const dispatch = useDispatch();
   const notify = () => toast.success('Deleted Successfully');
   const navigate = useNavigate();
@@ -41,6 +44,7 @@ const Home: React.FC = () => {
 
   const handleEdit = (id: string) => {
     dispatch(openDrawer(id));
+    mutate(id)
   };
 
   const handleDelete = (id: string) => {
