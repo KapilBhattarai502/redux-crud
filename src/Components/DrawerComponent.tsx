@@ -25,17 +25,13 @@ const DrawerComponent: React.FC = () => {
   const [form] = Form.useForm();
   const queryClient = useQueryClient();
 
-  const { data: user, refetch } = useQuery(
+  const { data: user } = useQuery(
     ['user', editingId],
     () => fetchUserById(editingId),
     { enabled: !!editingId } // Only fetch if editingId is set
   );
 
-  useEffect(() => {
-    if (editingId) {
-      refetch(); // Fetch data when editingId changes
-    }
-  }, [editingId, refetch]);
+ 
 
   useEffect(() => {
     if (user) {
