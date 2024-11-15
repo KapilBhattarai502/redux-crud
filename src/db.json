@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "fullname": "Arpit Gupta",
+      "age": "20",
+      "address": "Kathmandu,thamel",
+      "id": "5d73"
+    },
+    {
+      "fullname": "Sarika Pokhrel",
+      "age": "22",
+      "address": "Thali",
+      "id": "1e47"
+    },
+    {
+      "id": "08c4",
+      "fullname": "Subash Jirel",
+      "address": "Chabhil",
+      "age": "21"
+    }
+  ]
+}
